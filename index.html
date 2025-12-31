@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Saru ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    height:100vh;
+    font-family:'Segoe UI',sans-serif;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    background:#000;
+}
+
+/* BACKGROUND IMAGE */
+#bg{
+    position:fixed;
+    inset:0;
+    background:url("saru.jpg") center center / cover no-repeat;
+    z-index:-3;
+}
+
+
+/* MAIN BOX */
+#box{
+    width:90%;
+    max-width:850px;
+    padding:45px;
+    text-align:center;
+    backdrop-filter:blur(18px);
+    background:rgba(0,0,0,0.55);
+    border-radius:30px;
+    animation:fade 1.2s ease;
+    z-index:2;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(25px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+h1{
+    font-weight:300;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+p{
+    font-size:20px;
+    line-height:1.9;
+    margin:22px 0;
+}
+
+/* INPUT */
+input{
+    padding:14px 18px;
+    width:100%;
+    max-width:420px;
+    border-radius:30px;
+    border:none;
+    font-size:16px;
+    text-align:center;
+    outline:none;
+}
+
+/* BUTTON */
+button{
+    margin-top:20px;
+    padding:14px 45px;
+    font-size:16px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    background:#fff;
+    color:#000;
+    transition:.3s;
+}
+button:hover{transform:scale(1.08)}
+
+.hidden{display:none}
+
+/* BIG HEART ENDING */
+#bigHeart{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:60px;
+    opacity:0;
+    z-index:10;
+    pointer-events:none;
+}
+
+.showHeart{
+    animation:growHeart 4s ease forwards;
+}
+
+@keyframes growHeart{
+    0%{transform:scale(0);opacity:0}
+    20%{opacity:1}
+    100%{transform:scale(15);opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+
+<!-- BIG HEART -->
+<div id="bigHeart">❤️</div>
+
+<div id="box">
+
+    <!-- LOCK -->
+    <div id="lock">
+        <h1>Hello Saru 🌙</h1>
+        <p>This page is private.<br>Only one heart belongs here.</p>
+        <input type="password" id="pass" placeholder="Enter the secret">
+        <br>
+        <button onclick="unlock()">Unlock</button>
+        <p id="error" style="color:#ff9a9a;display:none;margin-top:15px">
+            That’s not it… try again 💭
+        </p>
+    </div>
+
+    <!-- STORY -->
+    <div id="story" class="hidden">
+        <h1 id="title"></h1>
+        <p id="text"></p>
+        <button id="nextBtn" onclick="next()">Continue</button>
+    </div>
+
+</div>
+
+<script>
+/* PASSWORD */
+function unlock(){
+    const input=document.getElementById("pass").value.trim().toUpperCase();
+    if(input==="ILOVEYOUSARU"){
+        document.getElementById("lock").classList.add("hidden");
+        document.getElementById("story").classList.remove("hidden");
+        showScene();
+    }else{
+        document.getElementById("error").style.display="block";
+    }
+}
+
+/* STORY DATA */
+let step=0;
+const scenes=[
+["Hey Saru…","Before anything else,<br>I want you to know this comes from a very real place."],
+["You matter to me","Your presence in my life isn’t small or ordinary.<br>You matter — deeply, genuinely, every day."],
+["I value you","I value your thoughts, your emotions, your silence, your smile.<br>You are important to me."],
+["I care about you","I care about how you feel, how your day goes,<br>and how the world treats your heart."],
+["I love you","I love you not loudly, not for show,<br>but steadily — with honesty and depth."],
+["You are my choice","In this life full of uncertainty,<br>you are someone I choose — again and again."],
+["My future includes you","When I think about tomorrow,<br>I see you there — naturally, peacefully, forever."],
+["For my entire life","I want to stand beside you,<br>care for you,<br>and love you for my entire life."],
+["This is my truth","Not a promise made in haste,<br>but a feeling that has grown quietly and deeply."],
+["That’s all, Saru ❤️","Just something honest,<br>from my heart to yours."]
+];
+
+function showScene(){
+    document.getElementById("title").innerHTML=scenes[step][0];
+    document.getElementById("text").innerHTML=scenes[step][1];
+}
+
+function next(){
+    if(step < scenes.length-1){
+        step++;
+        showScene();
+        if(step === scenes.length-1){
+            document.getElementById("nextBtn").innerText="Finish ❤️";
+        }
+    }else{
+        endWithHeart();
+    }
+}
+
+/* FINAL HEART ENDING */
+function endWithHeart(){
+    document.getElementById("box").style.display="none";
+    const heart=document.getElementById("bigHeart");
+    heart.classList.add("showHeart");
+}
+</script>
+
+</body>
+</html>
